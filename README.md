@@ -9,7 +9,7 @@
 ## ✨ Features
 
 - **100 Unieke Begrippen**: 60 formele woorden + 40 stijlfiguren
-- **20 Willekeurige Vragen**: Elke sessie is anders
+- **10 Willekeurige Vragen**: Elke sessie is anders
 - **Meerkeuze Vragen**: 4 antwoordopties per vraag
 - **Uitgebreide Uitleg**: Bij elke vraag krijg je de betekenis van ALLE 4 antwoorden uitgelegd
 - **Score Tracking**: Zie je voortgang en eindscore
@@ -87,7 +87,7 @@ Geen installatie of build process nodig!
 ## 📊 Hoe Werkt Het?
 
 1. **Start**: Klik op "Start het spel"
-2. **20 Vragen**: Beantwoord 20 willekeurige meerkeuze vragen
+2. **10 Vragen**: Beantwoord 10 willekeurige meerkeuze vragen
 3. **Directe Feedback**: Na elk antwoord zie je uitleg van alle opties
 4. **Score**: Zie je eindresultaat en percentage
 5. **Review**: Bekijk al je antwoorden nog eens

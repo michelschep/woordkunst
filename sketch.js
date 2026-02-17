@@ -17,8 +17,8 @@ function setup() {
 }
 
 function startGame() {
-  // Select 20 random questions from the 100 available
-  currentQuestions = shuffle(woordkunstData).slice(0, 20);
+  // Select 10 random questions from the 100 available
+  currentQuestions = shuffle(woordkunstData).slice(0, 10);
   currentQuestionIndex = 0;
   score = 0;
   userAnswers = [];
@@ -53,9 +53,9 @@ function loadQuestion() {
   question.shuffledCorrect = newCorrectIndex;
   
   // Update progress
-  document.getElementById('question-number').textContent = `Vraag ${currentQuestionIndex + 1} van 20`;
+  document.getElementById('question-number').textContent = `Vraag ${currentQuestionIndex + 1} van 10`;
   document.getElementById('score').textContent = `Score: ${score} / ${currentQuestionIndex}`;
-  const progress = ((currentQuestionIndex) / 20) * 100;
+  const progress = ((currentQuestionIndex) / 10) * 100;
   document.getElementById('progress-fill').style.width = `${progress}%`;
   
   // Display question
@@ -167,10 +167,10 @@ function showResults() {
   document.getElementById('progress-fill').style.width = '100%';
   
   // Show final score
-  document.getElementById('final-score').textContent = `${score} / 20`;
+  document.getElementById('final-score').textContent = `${score} / 10`;
   
   // Performance message
-  const percentage = (score / 20) * 100;
+  const percentage = (score / 10) * 100;
   let message = '';
   
   if (percentage === 100) {
@@ -197,7 +197,7 @@ function resetGame() {
   
   // Reset progress
   document.getElementById('progress-fill').style.width = '0%';
-  document.getElementById('question-number').textContent = 'Vraag 1 van 20';
+  document.getElementById('question-number').textContent = 'Vraag 1 van 10';
   document.getElementById('score').textContent = 'Score: 0 / 0';
   
   // Scroll to top
