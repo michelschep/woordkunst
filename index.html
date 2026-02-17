@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>🎨 Woordkunst - Verfijn je Nederlandse taal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>🎨 Woordkunst</h1>
+            <p class="subtitle">De kunst van taal leren</p>
+        </header>
+
+        <div class="progress-section">
+            <div class="progress-info">
+                <span id="question-number">Vraag 1 van 20</span>
+                <span id="score">Score: 0 / 0</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div id="welcome-screen" class="screen">
+            <div class="card welcome-card">
+                <h2>Welkom bij Woordkunst</h2>
+                <p>Test en verbeter je Nederlandse woordenschat met <strong>100 unieke begrippen</strong> en stijlfiguren.</p>
+                <ul class="features">
+                    <li>✓ 20 willekeurige vragen per spel</li>
+                    <li>✓ Uitleg bij alle antwoorden</li>
+                    <li>✓ Formele woorden en stijlfiguren</li>
+                    <li>✓ Leer in je eigen tempo</li>
+                </ul>
+                <button id="start-btn" class="btn btn-primary">Start het spel</button>
+            </div>
+        </div>
+
+        <div id="question-screen" class="screen hidden">
+            <div class="card question-card">
+                <div id="question-text" class="question-text"></div>
+                <div id="choices-container" class="choices-container"></div>
+            </div>
+
+            <div id="feedback-card" class="card feedback-card hidden">
+                <div id="feedback-content"></div>
+                <button id="next-btn" class="btn btn-primary">Volgende vraag →</button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen hidden">
+            <div class="card results-card">
+                <h2>🎉 Spel voltooid!</h2>
+                <div id="final-score" class="final-score"></div>
+                <div id="performance-message" class="performance-message"></div>
+                <button id="play-again-btn" class="btn btn-primary">Nog een keer spelen</button>
+                <button id="review-btn" class="btn btn-secondary">Bekijk je antwoorden</button>
+            </div>
+        </div>
+
+        <div id="review-screen" class="screen hidden">
+            <div class="card review-card">
+                <h2>📋 Jouw antwoorden</h2>
+                <div id="review-content"></div>
+                <button id="back-to-results-btn" class="btn btn-secondary">Terug naar resultaten</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="sketch.js"></script>
+</body>
+</html>
