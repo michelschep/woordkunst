@@ -39,13 +39,16 @@ function loadQuestion() {
   
   const question = currentQuestions[currentQuestionIndex];
   
-  // Shuffle choices and explanations together
+  // Create and shuffle indices using Fisher-Yates
   const indices = [0, 1, 2, 3];
-  const shuffledIndices = shuffle(indices);
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
   
-  const shuffledChoices = shuffledIndices.map(i => question.choices[i]);
-  const shuffledExplanations = shuffledIndices.map(i => question.explanations[i]);
-  const newCorrectIndex = shuffledIndices.indexOf(question.correct);
+  const shuffledChoices = indices.map(i => question.choices[i]);
+  const shuffledExplanations = indices.map(i => question.explanations[i]);
+  const newCorrectIndex = indices.indexOf(question.correct);
   
   // Store shuffled data on question object
   question.shuffledChoices = shuffledChoices;
