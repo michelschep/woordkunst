@@ -39,6 +39,19 @@ function loadQuestion() {
   
   const question = currentQuestions[currentQuestionIndex];
   
+  // Shuffle choices and explanations together
+  const indices = [0, 1, 2, 3];
+  const shuffledIndices = shuffle(indices);
+  
+  const shuffledChoices = shuffledIndices.map(i => question.choices[i]);
+  const shuffledExplanations = shuffledIndices.map(i => question.explanations[i]);
+  const newCorrectIndex = shuffledIndices.indexOf(question.correct);
+  
+  // Store shuffled data on question object
+  question.shuffledChoices = shuffledChoices;
+  question.shuffledExplanations = shuffledExplanations;
+  question.shuffledCorrect = newCorrectIndex;
+  
   // Update progress
   document.getElementById('question-number').textContent = `Vraag ${currentQuestionIndex + 1} van 20`;
   document.getElementById('score').textContent = `Score: ${score} / ${currentQuestionIndex}`;
@@ -48,11 +61,11 @@ function loadQuestion() {
   // Display question
   document.getElementById('question-text').textContent = question.question;
   
-  // Create choice buttons
+  // Create choice buttons with shuffled choices
   const choicesContainer = document.getElementById('choices-container');
   choicesContainer.innerHTML = '';
   
-  question.choices.forEach((choice, index) => {
+  shuffledChoices.forEach((choice, index) => {
     const btn = document.createElement('button');
     btn.className = 'choice-btn';
     btn.textContent = choice;
@@ -66,17 +79,19 @@ function loadQuestion() {
 
 function selectAnswer(selectedIndex) {
   const question = currentQuestions[currentQuestionIndex];
-  const isCorrect = selectedIndex === question.correct;
+  const isCorrect = selectedIndex === question.shuffledCorrect;
   
   if (isCorrect) {
     score++;
   }
   
-  // Store user answer
+  // Store user answer (with original choice text for review)
   userAnswers.push({
     question: question.question,
     selected: selectedIndex,
-    correct: question.correct,
+    selectedText: question.shuffledChoices[selectedIndex],
+    correct: question.shuffledCorrect,
+    correctText: question.shuffledChoices[question.shuffledCorrect],
     isCorrect: isCorrect
   });
   
@@ -87,7 +102,7 @@ function selectAnswer(selectedIndex) {
   const buttons = document.querySelectorAll('.choice-btn');
   buttons.forEach((btn, index) => {
     btn.disabled = true;
-    if (index === question.correct) {
+    if (index === question.shuffledCorrect) {
       btn.classList.add('correct');
     } else if (index === selectedIndex && !isCorrect) {
       btn.classList.add('incorrect');
@@ -111,19 +126,19 @@ function showFeedback(question, selectedIndex, isCorrect) {
     html += `<div class="result-header incorrect">✗ Helaas, niet het juiste antwoord</div>`;
   }
   
-  // Show explanation for the selected answer
+  // Show explanation for the selected answer (using shuffled data)
   html += `<div class="explanation">`;
   html += `<h3>Jouw antwoord:</h3>`;
-  html += `<p><strong>"${question.choices[selectedIndex]}"</strong></p>`;
-  html += `<p>${question.explanations[selectedIndex]}</p>`;
+  html += `<p><strong>"${question.shuffledChoices[selectedIndex]}"</strong></p>`;
+  html += `<p>${question.shuffledExplanations[selectedIndex]}</p>`;
   html += `</div>`;
   
-  // Show ALL explanations
+  // Show ALL explanations (using shuffled data)
   html += `<h3>Alle antwoordopties uitgelegd:</h3>`;
-  question.choices.forEach((choice, index) => {
+  question.shuffledChoices.forEach((choice, index) => {
     html += `<div class="option-explanation">`;
     html += `<span class="option-label">${index + 1}. ${choice}</span>`;
-    html += `<p>${question.explanations[index]}</p>`;
+    html += `<p>${question.shuffledExplanations[index]}</p>`;
     html += `</div>`;
   });
   
@@ -205,8 +220,8 @@ function showReview() {
     
     if (userAnswer) {
       html += `<div class="review-answer">`;
-      html += `<p><strong>Jouw antwoord:</strong> ${question.choices[userAnswer.selected]}</p>`;
-      html += `<p><strong>Correct antwoord:</strong> ${question.choices[question.correct]}</p>`;
+      html += `<p><strong>Jouw antwoord:</strong> ${userAnswer.selectedText}</p>`;
+      html += `<p><strong>Correct antwoord:</strong> ${userAnswer.correctText}</p>`;
       html += `<p class="status">${isCorrect ? '✓ Correct' : '✗ Fout'}</p>`;
       html += `</div>`;
     }
